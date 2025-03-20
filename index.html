@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Kibo Modz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white py-12">
+
+  <div class="max-w-xl mx-auto">
+    <h2 class="text-4xl font-extrabold mb-8 text-center">FAQ</h2>
+    
+    <div class="text-center mb-6">
+      <label for="language" class="mr-2">Select Language:</label>
+      <select id="language" class="bg-gray-800 text-white p-2 rounded" onchange="changeLanguage()">
+        <option value="en">English</option>
+        <option value="id">Bahasa Indonesia</option>
+      </select>
+    </div>
+
+    <div class="space-y-6" id="faq-container">
+      
+    </div>
+  </div>
+
+<script>
+  const faqs = {
+    en: [
+      { q: "What is Kibo Modz Proxy?", a: "Kibo Modz Proxy is a special proxy that allows users to unlock all premium features in Free Fire without topping up. With this proxy, you can access skins, emotes, bundles, and more for free!" },
+      { q: "What features can be accessed?", a: "With Kibo Modz Proxy, you can enjoy various features : <br>✅ Unlock all skins, emotes, bundles, weapons, etc.<br>✅ Custom Free Fire dashboard or mail.<br>✅ Get free coins and diamonds.<br>✅ Custom ID, likes, and names as desired.<br>✅ No lag – Smoother gameplay without interruptions." },
+      { q: "What payment methods are accepted?", a: "We offer various payment methods : <br><br>💰 <strong>Indonesia :</strong> QRIS, Dana, GoPay.<br>🌍 <strong>International :</strong> PayPal, Binance, and more.<br><br>Fast and secure transactions!" },
+      { q: "Can Kibo Modz Proxy be used on all devices?", a: "This proxy can be used on various devices, including : <br><br>📱 <strong>Android :</strong> Rooted and Non-Root with Virtual Root like UGPhone.<br>🍏 <strong>iOS</strong><br>💻 <strong>Android Emulators :</strong> Bluestacks, LDPlayer, etc." },
+      { q: "How to buy Kibo Modz Proxy?", a: "To access Kibo Modz Proxy, you need to purchase it first. All proxy details (IP & Port) are only given to official buyers. Please contact the admin/seller for more information." },
+      { q: "How to stop using Kibo Modz Proxy?", a: "If you want to return to normal mode, follow these steps :<br>🔹 Disable proxy connection in ProxyDroid.<br>🔹 Remove mitmproxy certificate if you no longer want to use it.<br>🔹 Restart your phone or network to restore normal connection." },
+      { q: "Who to contact for issues?", a: "If you experience issues or have questions before purchasing, please contact the official Kibo Modz Proxy admin/seller on Discord." }
+    ],
+    id: [
+      { q: "Apa itu Kibo Modz Proxy?", a: "Kibo Modz Proxy adalah proxy khusus yang memungkinkan pengguna membuka semua fitur premium di Free Fire tanpa top up. Dengan proxy ini, Anda bisa mengakses skin, emote, bundle, dan banyak lagi secara gratis!" },
+      { q: "Fitur apa saja yang bisa diakses?", a: "Dengan Kibo Modz Proxy, Anda bisa menikmati berbagai fitur : <br>✅ Buka semua skin, emote, bundle, senjata, dll.<br>✅ Dashboard atau surat Free Fire kustom.<br>✅ Dapatkan koin dan diamond gratis.<br>✅ ID, like, dan nama kustom sesuai keinginan.<br>✅ Tanpa lag – Permainan lancar tanpa gangguan." },
+      { q: "Metode pembayaran apa saja yang diterima?", a: "Kami menawarkan berbagai metode pembayaran : <br><br>💰 <strong>Indonesia :</strong> QRIS, Dana, GoPay.<br>🌍 <strong>Internasional :</strong> PayPal, Binance, dan lainnya.<br><br>Transaksi cepat dan aman!" },
+      { q: "Apakah Kibo Modz Proxy bisa digunakan di semua perangkat?", a: "Proxy ini bisa digunakan di berbagai perangkat, termasuk : <br><br>📱 <strong>Android :</strong> Root dan Non-Root dengan Virtual Root seperti UGPhone.<br>🍏 <strong>iOS</strong><br>💻 <strong>Emulator Android :</strong> Bluestacks, LDPlayer, dll." },
+      { q: "Bagaimana cara membeli Kibo Modz Proxy?", a: "Untuk mengakses Kibo Modz Proxy, Anda harus membelinya terlebih dahulu. Semua detail proxy (IP & Port) hanya diberikan kepada pembeli resmi. Silakan hubungi admin/penjual untuk informasi lebih lanjut." },
+      { q: "Bagaimana cara berhenti menggunakan Kibo Modz Proxy?", a: "Jika Anda ingin kembali ke mode normal, ikuti langkah-langkah berikut :<br>🔹 Nonaktifkan koneksi proxy di ProxyDroid.<br>🔹 Hapus sertifikat mitmproxy jika tidak ingin menggunakannya lagi.<br>🔹 Restart ponsel atau jaringan Anda untuk mengembalikan koneksi normal." },
+      { q: "Siapa yang bisa dihubungi jika ada masalah?", a: "Jika Anda mengalami masalah atau memiliki pertanyaan sebelum membeli, silakan hubungi admin/penjual resmi Kibo Modz Proxy di Discord." }
+    ]
+  };
+
+  function changeLanguage() {
+    const lang = document.getElementById("language").value;
+    const faqContainer = document.getElementById("faq-container");
+    faqContainer.innerHTML = "";
+    faqs[lang].forEach((faq, index) => {
+      faqContainer.innerHTML += `
+        <div class='bg-gray-800 shadow-md rounded-lg'>
+          <button class='w-full flex items-center justify-between p-4 focus:outline-none' onclick='toggleItem(${index})'>
+            <span class='text-lg font-semibold'>${faq.q}</span>
+            <span id='icon-${index}' class='text-gray-400'>+</span>
+          </button>
+          <div id='content-${index}' class='text-gray-300 overflow-hidden max-h-0 transition-all duration-500 ease-in-out'>
+            <p class='p-4'>${faq.a}</p>
+          </div>
+        </div>`;
+    });
+  }
+
+  function toggleItem(id) {
+      const content = document.getElementById(`content-${id}`);
+      const icon = document.getElementById(`icon-${id}`);
+      if (content.style.maxHeight) {
+          content.style.maxHeight = null;
+          icon.textContent = "+";
+      } else {
+          content.style.maxHeight = content.scrollHeight + "px";
+          icon.textContent = "-";
+      }
+  }
+
+  window.onload = changeLanguage;
+</script>
+</body>
+</html>
